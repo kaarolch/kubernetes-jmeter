@@ -1,0 +1,10 @@
+name: jmeter
+description: 'Ditributed jmeter workflow inside kuberentes'
+version: 0.0.1
+appVersion: "4.0"
+home: https://github.com/kaarolch/kubernetes-jmeter
+sources:
+  - https://github.com/kaarolch/kubernetes-jmeter
+maintainers:
+  - name: Karol Chrapek
+    email: kaarol@it-flow.pl
