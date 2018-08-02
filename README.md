@@ -1,7 +1,8 @@
+[![License](https://img.shields.io/badge/license-MIT%20License-brightgreen.svg)](https://opensource.org/licenses/MIT)
 # kubernetes-jmeter
 Jmeter test workload inside kubernetes.
 
-I could not find something similar to this project or all other projects did not meet my requirements, so ... let's do something thats works for me and others. 
+I could not find something similar to this project and other projects did not meet my requirements, so ... let's do something that works for me and others.
 
 # AC
 * All jmeter instances inside docker container
@@ -11,14 +12,11 @@ I could not find something similar to this project or all other projects did not
 
 ## Status of the Project
 
-This project is in bootstrap phase. I hope that in a next few weeks you found something more here. 
+This project is in bootstrap phase. I hope that in a next few weeks you found something more here.
 
-## License
-
-MIT
 
 ## To Do
 Everything ;)
-* Docker images 
-* Visualziation stack 
+* Docker images
+* Visualziation stack
 * Helm charts
