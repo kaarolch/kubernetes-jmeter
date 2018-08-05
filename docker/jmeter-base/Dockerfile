@@ -15,3 +15,4 @@ RUN apk update && \
     chmod +x /usr/bin/tpl
 
 ENV JMETER_HOME /opt/jmeter
+ENV PATH $PATH:$JMETER_HOME/bin
