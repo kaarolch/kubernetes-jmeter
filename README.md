@@ -2,7 +2,7 @@
 # kubernetes-jmeter
 Jmeter test workload inside kubernetes.
 
-I could not find something similar to this project and other projects did not meet my requirements, so ... let's do something that works for me and others.
+Any similar projects did not meet my expectation, so ... let's do something that works for me and others.
 
 # AC
 * All jmeter instances inside docker container
