@@ -3,3 +3,12 @@ imageCredentials:
   #pullSecrets: docker-registry-secrets
   # username: docker_user
   # password: docker_user_password
+images:
+  master:
+    repo: kaarol/jmeter-master
+    tag: latest
+    pullPolicy: Always
+  slave:
+    repo: kaarol/jmeter-master
+    tag: latest
+    pullPolicy: Always
