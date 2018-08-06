@@ -1,0 +1,56 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {{ template "jmeter.fullname" . }}-slave
+{{- if .Values.annotations }}
+  {{ toYaml .Values.annotations | indent 4 }}
+{{- end }}
+  labels:
+    app: {{ template "jmeter.name" . }}-slave
+    chart: {{ template "jmeter.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+{{- if .Values.labels }}
+  {{ toYaml .Values.lables | indent 4 }}
+{{- end }}
+spec:
+  replicas: {{ .Values.config.slaves.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ template "jmeter.name" . }}-slave
+      release: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ template "jmeter.name" . }}-slave
+        release: {{ .Release.Name }}
+    spec:
+      containers:
+      - name: {{ template "jmeter.name" . }}-slave
+        image: "{{ .Values.images.slave.repo }}:{{ .Values.images.slave.tag }}"
+        imagePullPolicy: {{ .Values.images.slave.pullPolicy }}
+        env:
+        - name: SSL_DISABLED
+          value: {{ .Values.config.enableSSL }}
+        livenessProbe:
+          tcpSocket:
+            port: 1099
+          initialDelaySeconds: 60
+          periodSeconds: 5
+        ports:
+        - containerPort: 1099
+          name: server-port
+          protocol: TCP
+        - containerPort: 60001
+          name: rmi-local-port
+          protocol: TCP
+        readinessProbe:
+          tcpSocket:
+            port: 1099
+          initialDelaySeconds: 30
+          periodSeconds: 5
+      {{- if .Values.imageCredentials.pullSecrets }}
+      imagePullSecrets:
+        - name: {{ .Values.imageCredentials.pullSecrets }}
+      {{- end }}
+      restartPolicy: {{ .Values.config.slaves.restartPolicy }}
