@@ -1,5 +1,5 @@
 imageCredentials:
   registry: docker.com
-  pullSecrets: docker-registry-secrets
+  #pullSecrets: docker-registry-secrets
   # username: docker_user
   # password: docker_user_password
