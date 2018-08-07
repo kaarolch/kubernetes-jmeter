@@ -10,13 +10,17 @@ images:
     tag: latest
     pullPolicy: Always
   slave:
-    repo: kaarol/jmeter-master
+    repo: kaarol/jmeter-slave
     tag: latest
     pullPolicy: Always
 
 annotations: {}
 config:
   enableSSL: true
+  master:
+    replicaCount: 1
+    restartPolicy: Always
+    testType: oneShot
   slaves:
     replicaCount: 2
     restartPolicy: Always

@@ -17,6 +17,6 @@ This project is in bootstrap phase. I hope that in a next few weeks you found so
 
 ## To Do
 Everything ;)
-* Docker images
-* Visualziation stack
-* Helm charts
+* Docker images - 50% done
+* Visualziation stack (Grafana + influxdb)
+* Helm charts - 30% done
