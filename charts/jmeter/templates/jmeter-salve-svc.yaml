@@ -17,6 +17,7 @@ spec:
   selector:
     app: {{ template "jmeter.name" . }}-slave
     release: {{ .Release.Name }}
+  clusterIP: None
   ports:
   - name: server-port
     protocol: TCP

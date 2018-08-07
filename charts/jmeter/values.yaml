@@ -19,7 +19,7 @@ config:
   enableSSL: true
   master:
     replicaCount: 1
-    restartPolicy: Always
+    restartPolicy: Never
     testType: oneShot
   slaves:
     replicaCount: 2
