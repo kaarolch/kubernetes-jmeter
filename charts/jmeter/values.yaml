@@ -18,6 +18,7 @@ annotations: {}
 config:
   enableSSL: true
   master:
+    #testsConfigMap: jmeter-test
     replicaCount: 1
     restartPolicy: Never
     testType: oneShot

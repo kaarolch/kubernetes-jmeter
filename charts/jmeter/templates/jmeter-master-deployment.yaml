@@ -31,11 +31,26 @@ spec:
         imagePullPolicy: {{ .Values.images.master.pullPolicy }}
         env:
         - name: SSL_DISABLED
-          value: {{ .Values.config.enableSSL }}
+          value: {{ .Values.config.master.enableSSL }}
+        - name: ONE_SHOT
+          value: {{ .Values.config.master.testType }}
+        - name: SLAVE_SVC_NAME
+          value: "{{ template "jmeter.fullname" . }}-slave.{{ .Release.Namespace }}.svc.cluster.local"
         ports:
         - containerPort: 60000
           name: rmi-local-port
           protocol: TCP
+        volumeMounts:
+        {{- if .Values.config.master.testsConfigMap }}
+        - name: test-volume
+          mountPath: /test
+        {{- end }}
+      volumes:
+        {{- if .Values.config.master.testsConfigMap }}
+        - name: test-volume
+          configMap:
+            name: {{ .Values.config.master.testsConfigMap }}
+        {{- end }}
       {{- if .Values.imageCredentials.pullSecrets }}
       imagePullSecrets:
         - name: {{ .Values.imageCredentials.pullSecrets }}
