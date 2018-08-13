@@ -1,0 +1,58 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {{ template "jmeter.fullname" . }}-master
+{{- if .Values.annotations }}
+  {{ toYaml .Values.annotations | indent 4 }}
+{{- end }}
+  labels:
+    app: {{ template "jmeter.name" . }}-master
+    chart: {{ template "jmeter.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+{{- if .Values.labels }}
+  {{ toYaml .Values.lables | indent 4 }}
+{{- end }}
+spec:
+  replicas: {{ .Values.config.master.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ template "jmeter.name" . }}-master
+      release: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ template "jmeter.name" . }}-master
+        release: {{ .Release.Name }}
+    spec:
+      containers:
+      - name: {{ template "jmeter.name" . }}-master
+        image: "{{ .Values.images.master.repo }}:{{ .Values.images.master.tag }}"
+        imagePullPolicy: {{ .Values.images.master.pullPolicy }}
+        env:
+        - name: SSL_DISABLED
+          value: {{ .Values.config.master.enableSSL }}
+        - name: ONE_SHOT
+          value: {{ .Values.config.master.testType }}
+        - name: SLAVE_SVC_NAME
+          value: "{{ template "jmeter.fullname" . }}-slave.{{ .Release.Namespace }}.svc.cluster.local"
+        ports:
+        - containerPort: 60000
+          name: rmi-local-port
+          protocol: TCP
+        volumeMounts:
+        {{- if .Values.config.master.testsConfigMap }}
+        - name: test-volume
+          mountPath: /test
+        {{- end }}
+      volumes:
+        {{- if .Values.config.master.testsConfigMap }}
+        - name: test-volume
+          configMap:
+            name: {{ .Values.config.master.testsConfigMap }}
+        {{- end }}
+      {{- if .Values.imageCredentials.pullSecrets }}
+      imagePullSecrets:
+        - name: {{ .Values.imageCredentials.pullSecrets }}
+      {{- end }}
+      restartPolicy: {{ .Values.config.master.restartPolicy }}
