@@ -30,16 +30,15 @@ labels: {}
 influxdb:
   config:
     graphite:
-    enabled: true
-    bind_address: 2003
-    database: jmeter
+      enabled: true
+      bind_address: 2003
+      database: jmeter
   env:
   - name: INFLUXDB_DB
     value: "jmeter"
   persistence:
     enabled: false
     # storageClass: "-"
-    accessMode: ReadWriteOnce
     size: 8Gi
   resources:
     requests:
