@@ -1,4 +1,4 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ template "jmeter.fullname" . }}-slave
@@ -31,7 +31,7 @@ spec:
         imagePullPolicy: {{ .Values.images.slave.pullPolicy }}
         env:
         - name: SSL_DISABLED
-          value: {{ .Values.config.enableSSL }}
+          value: "{{ .Values.config.enableSSL }}"
         livenessProbe:
           tcpSocket:
             port: 1099

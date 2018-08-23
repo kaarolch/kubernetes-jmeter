@@ -20,7 +20,7 @@ config:
   master:
     #testsConfigMap: jmeter-test
     replicaCount: 1
-    restartPolicy: Never
+    restartPolicy: Always
     testType: oneShot
   slaves:
     replicaCount: 2
