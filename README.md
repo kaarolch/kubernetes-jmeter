@@ -12,7 +12,7 @@ Any similar projects did not meet my expectation, so ... let's do something that
 
 ## Status of the Project
 
-This project is in bootstrap phase. I hope that in a next few weeks you found something more here.
+Currently jmeter is able to run some test on distributed slaves but there still is a lot to do. In few days there should be some documentation added to this repo. Also charts noted is still not added to master branch, I hope it would be add soon. 
 
 
 ## To Do

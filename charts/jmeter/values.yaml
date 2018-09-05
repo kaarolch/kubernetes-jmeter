@@ -47,3 +47,13 @@ influxdb:
     limits:
       memory: 4Gi
       cpu: 1
+grafana:
+  datasources:
+    datasources.yaml:
+      apiVersion: 1
+      datasources:
+        - name: jmeter-influxdb
+          type: influxdb
+          url: "http://test-influxdb:8086"
+          access: proxy
+          isDefault: true
