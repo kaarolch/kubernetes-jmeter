@@ -15,16 +15,18 @@ images:
     pullPolicy: Always
 
 annotations: {}
+
 config:
   enableSSL: true
   master:
     #testsConfigMap: jmeter-test
     replicaCount: 1
     restartPolicy: Always
-    testType: oneShot
+    oneShotTest: true
   slaves:
     replicaCount: 2
     restartPolicy: Always
+
 labels: {}
 
 influxdb:
@@ -54,6 +56,7 @@ grafana:
       datasources:
         - name: jmeter-influxdb
           type: influxdb
+          #This should be tempalte base on Release.namez```
           url: "http://test-influxdb:8086"
           access: proxy
           isDefault: true

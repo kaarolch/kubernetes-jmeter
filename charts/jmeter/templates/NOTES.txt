@@ -1,0 +1,12 @@
+KUBERNETES JMETER
+
+Services deployed to {{ .Release.Namespace }} namespace.
+{{- if .Values.config.master.oneShotTest }}
+{{- if .Values.config.master.testsConfigMap }}
+Jmeter master would automatically start test that was provided inside configMap {{ .Values.config.master.testsConfigMap }} in {{ .Release.Namespace }} namespace.
+{{- else }}
+Jmeter master would automatically start test when tests' files would be uploaded to /test/ inside {{ template "jmeter.fullname" . }}-master pod.
+{{ end }}
+{{- else }}
+Jmester master deployment scheduled {{ template "jmeter.fullname" . }}-master but tests need to run manually.
+{{ end }}
