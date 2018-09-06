@@ -10,3 +10,5 @@ Jmeter master would automatically start test when tests' files would be uploaded
 {{- else }}
 Jmester master deployment scheduled {{ template "jmeter.fullname" . }}-master but tests need to run manually.
 {{ end }}
+
+InfluxDB
