@@ -31,7 +31,7 @@ spec:
         imagePullPolicy: {{ .Values.images.master.pullPolicy }}
         env:
         - name: SSL_DISABLED
-          value: "{{ .Values.config.master.enableSSL }}"
+          value: "{{ .Values.config.disableSSL }}"
         - name: ONE_SHOT
           value: {{ .Values.config.master.testType }}
         - name: SLAVE_SVC_NAME

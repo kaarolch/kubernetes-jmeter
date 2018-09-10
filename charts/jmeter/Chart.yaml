@@ -1,6 +1,6 @@
 name: jmeter
 description: 'Ditributed jmeter workflow inside kuberentes'
-version: 0.0.1
+version: 0.0.3
 appVersion: "4.0"
 home: https://github.com/kaarolch/kubernetes-jmeter
 sources:

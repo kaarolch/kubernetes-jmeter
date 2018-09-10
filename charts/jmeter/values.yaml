@@ -17,12 +17,12 @@ images:
 annotations: {}
 
 config:
-  enableSSL: true
+  disableSSL: true
   master:
     #testsConfigMap: jmeter-test
     replicaCount: 1
     restartPolicy: Always
-    oneShotTest: true
+    oneShotTest: false
   slaves:
     replicaCount: 2
     restartPolicy: Always

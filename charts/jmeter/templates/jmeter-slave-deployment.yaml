@@ -31,7 +31,7 @@ spec:
         imagePullPolicy: {{ .Values.images.slave.pullPolicy }}
         env:
         - name: SSL_DISABLED
-          value: "{{ .Values.config.enableSSL }}"
+          value: "{{ .Values.config.disableSSL }}"
         livenessProbe:
           tcpSocket:
             port: 1099
