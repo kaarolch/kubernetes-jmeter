@@ -13,23 +13,44 @@ Jmester master deployment scheduled {{ template "jmeter.fullname" . }}-master bu
 
 InfluxDB
 
-|-Api url:
+Api url:
 {{- if .Values.influxdb.config.http.bind_adress -}}
  http://{{ .Release.Name }}-influxdb.{{.Release.Namespace}}.svc.cluster.local:{{ .Values.influxdb.config.http.bind_adress }}
 {{- else -}}
  http://{{ .Release.Name }}-influxdb.{{.Release.Namespace}}.svc.cluster.local:8086
 {{- end }}
-|-Graphite for jmeter config:
+Graphite for jmeter config:
 {{- if .Values.influxdb.config.graphite.enabled }}
-|--Host: {{ .Release.Name }}-influxdb.{{.Release.Namespace}}.svc.cluster.local
+-Host: {{ .Release.Name }}-influxdb.{{.Release.Namespace}}.svc.cluster.local
 {{- if .Values.influxdb.config.graphite.bind_address }}
-|--Port: {{.Values.influxdb.config.graphite.bind_address}}
+-Port: {{.Values.influxdb.config.graphite.bind_address}}
 {{- else }}
-|--Port: 2003
+-Port: 2003
 {{- end }}
 {{- if .Values.influxdb.config.graphite.database }}
-|--RootMetrixPrefix [influx database]: {{ .Values.influxdb.config.graphite.database }}
+-RootMetrixPrefix [influx database]: {{ .Values.influxdb.config.graphite.database }}
 {{- else }}
-|--RootMetrixPrefix [influx database]: graphite
+-RootMetrixPrefix [influx database]: graphite
 {{- end }}
+{{- end }}
+
+Grafana
+
+{{- if .Values.grafana.ingress.enabled }}
+Grafan is available via below urls:
+{{- range .Values.grafana.ingress.hosts }}
+    - {{ . | title | quote }}
+{{- end }}
+{{- else}}
+Grafan is available inside Kuberentes cluster via: http://{{ .Release.Name }}-grafana.{{.Release.Namespace}}.svc.cluster.local:3000
+{{- end }}
+{{- if .Values.grafana.adminUser }}
+User: {{.Values.grafana.adminUser }}
+{{- else }}
+User: admin
+{{ end }}
+{{- if .Values.grafana.adminPassword }}
+Password: {{.Values.grafana.adminPassword }}
+{{- else }}
+Password: `kubectl -n {{.Release.Namespace}} get secrets {{ .Release.Name }}-grafana -o 'go-template={ {index .data "admin-password"} }' | base64 -d`
 {{- end }}
