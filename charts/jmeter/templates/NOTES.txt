@@ -12,3 +12,24 @@ Jmester master deployment scheduled {{ template "jmeter.fullname" . }}-master bu
 {{ end }}
 
 InfluxDB
+
+|-Api url:
+{{- if .Values.influxdb.config.http.bind_adress -}}
+ http://{{ .Release.Name }}-influxdb.{{.Release.Namespace}}.svc.cluster.local:{{ .Values.influxdb.config.http.bind_adress }}
+{{- else -}}
+ http://{{ .Release.Name }}-influxdb.{{.Release.Namespace}}.svc.cluster.local:8086
+{{- end }}
+|-Graphite for jmeter config:
+{{- if .Values.influxdb.config.graphite.enabled }}
+|--Host: {{ .Release.Name }}-influxdb.{{.Release.Namespace}}.svc.cluster.local
+{{- if .Values.influxdb.config.graphite.bind_address }}
+|--Port: {{.Values.influxdb.config.graphite.bind_address}}
+{{- else }}
+|--Port: 2003
+{{- end }}
+{{- if .Values.influxdb.config.graphite.database }}
+|--RootMetrixPrefix [influx database]: {{ .Values.influxdb.config.graphite.database }}
+{{- else }}
+|--RootMetrixPrefix [influx database]: graphite
+{{- end }}
+{{- end }}
