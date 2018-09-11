@@ -65,7 +65,25 @@ The command removes all the Kubernetes components associated with the chart and 
 
 The default configuration values for this chart are listed in [values.yaml](charts/jmeter/values.yaml).
 
-|
+| Parameter                       | Description                                   | Default                  |
+|---------------------------------|-----------------------------------------------|--------------------------|
+| `imageCredentials.registry`     | Image repository                              | `docker.com`             |
+| `imageCredentials.username`     | Repository user                               | -                        |
+| `imageCredentials.password`     | Repository password                           | -                        |
+| `image.master.repository`       | Image master repository                       | `kaarol/jmeter-master`   |
+| `image.master.tag`              | Image master tag.                             | `test`                   |
+| `image.master.pullPolicy`       | Image master pull policy                      | `Always`                 |
+| `image.slave.repository`        | Image master repository                       | `kaarol/jmeter-slave`    |
+| `image.slave.tag`               | Image master tag.                             | `latest`                 |
+| `image.slave.pullPolicy`        | Image master pull policy                      | `Always`                 |
+| `config.disableSSL`             | Disable SSL communication between node        | `true`                   |
+| `config.master.replicaCount`    | Number of master                              | `1` - currently only one |
+| `config.master.restartPolicy`   | Pod restart policy                            | `Always`                 |
+| `config.master.oneShotTest`     | Run test after successful deployment          | `flase`                  |
+| `image.slave.replicaCount`      | Number of jmeter workers                      | `2`                      |
+| `image.slave.restartPolicy`     | Pod restart policy                            | `Always`                 |
+| `anotations`                    | Additional annotations                        | `{}`                     |
+| `labels`                        | Additional labels                             | `{}`                     |
 
 ## Project status
 
@@ -81,5 +99,5 @@ Everything ;)
 3.  Jmeter test get from maven (0%)
 4.  Jmeter test get from git (20%) - still not push to master
 5.  SSL between Jmeter nodes
-6.  Documentation (40%)
+6.  Documentation (50%)
 7.  Release of a helm charts and helm repo update process via travis
