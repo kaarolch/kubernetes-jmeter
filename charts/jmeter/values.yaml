@@ -56,7 +56,7 @@ grafana:
       datasources:
         - name: jmeter-influxdb
           type: influxdb
-          #This should be tempalte base on Release.namez```
+          #This should be tempalte base on Release.name
           url: "http://test-influxdb:8086"
           access: proxy
           isDefault: true
