@@ -28,6 +28,12 @@ The command deploys Jmeter on the Kubernetes cluster in the default configuratio
 
 If you change deployment name (`-n test`) please update grafana datasource influx `url` inside your custom values.yaml files.
 
+If you already own grafan and influx stack, kuberentes-jmeter could be deployed without those two dependencies.
+
+```
+helm install --namespace YOUR_NAMESPACE install -n test ./ --set grafana.enabled=false,influxdb.enabled=false
+```
+
 ## Run sample test
 
 ### Manual run
@@ -74,5 +80,5 @@ Everything ;)
 4.  Jmeter test get from git (20%) - still not push to master
 5.  Default grafana dashboard
 7.  SSL between Jmeter nodes
-8.  Documentation (30%)
+8.  Documentation (40%)
 9.  Release of a helm charts and helm repo update process via travis

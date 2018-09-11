@@ -11,6 +11,7 @@ Jmeter master would automatically start test when tests' files would be uploaded
 Jmester master deployment scheduled {{ template "jmeter.fullname" . }}-master but tests need to run manually.
 {{ end }}
 
+{{- if .Values.influxdb.enabled }}
 InfluxDB
 
 Api url:
@@ -33,7 +34,8 @@ Graphite for jmeter config:
 -RootMetrixPrefix [influx database]: graphite
 {{- end }}
 {{- end }}
-
+{{- end }}
+{{- if .Values.grafana.enabled }}
 Grafana
 
 {{- if .Values.grafana.ingress.enabled }}
@@ -53,4 +55,5 @@ User: admin
 Password: {{.Values.grafana.adminPassword }}
 {{- else }}
 Password: `kubectl -n {{.Release.Namespace}} get secrets {{ .Release.Name }}-grafana -o 'go-template={ {index .data "admin-password"} }' | base64 -d`
+{{- end }}
 {{- end }}

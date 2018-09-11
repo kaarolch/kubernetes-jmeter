@@ -30,6 +30,7 @@ config:
 labels: {}
 
 influxdb:
+  enabled: true
   config:
     graphite:
       enabled: true
@@ -50,6 +51,7 @@ influxdb:
       memory: 4Gi
       cpu: 1
 grafana:
+  enabled: true
   datasources:
     datasources.yaml:
       apiVersion: 1
