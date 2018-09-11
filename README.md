@@ -19,7 +19,7 @@ helm install --namespace YOUR_NAMESPACE install -n test ./
 If you would like to provide custom values.yaml you can add `-f` flag.
 
 ```
-helm install --namespace YOUR_NAMESPACE install -n test ./ -f my_values.yaml
+helm install install -n test ./ -f my_values.yaml
 ```
 
 The command deploys Jmeter on the Kubernetes cluster in the default configuration. The [configuration](#configuration) section lists the parameters that can be configured during installation.
@@ -31,7 +31,7 @@ If you change deployment name (`-n test`) please update grafana datasource influ
 If you already own grafan and influx stack, kuberentes-jmeter could be deployed without those two dependencies.
 
 ```
-helm install --namespace YOUR_NAMESPACE install -n test ./ --set grafana.enabled=false,influxdb.enabled=false
+helm install install -n test ./ --set grafana.enabled=false,influxdb.enabled=false
 ```
 
 ## Run sample test
@@ -40,13 +40,13 @@ helm install --namespace YOUR_NAMESPACE install -n test ./ --set grafana.enabled
 Copy example test
 
 ```
-kubectl -n YOUR_NAMESPACE cp examples/simple_test.jmx $(kubectl -n YOUR_NAMESPACE get pod -l "app=jmeter-master" -o jsonpath='{.items[0].metadata.name}'):/test/
+kubectl cp examples/simple_test.jmx $(kubectl get pod -l "app=jmeter-master" -o jsonpath='{.items[0].metadata.name}'):/test/
 
 ```
 Run tests
 
 ```
-kubectl -n YOUR_NAMESPACE exec  -it $(kubectl -n YOUR_NAMESPACE get pod -l "app=jmeter-master" -o jsonpath='{.items[0].metadata.name}') -- sh -c 'ONE_SHOT=true; /run-test.sh'
+kubectl exec  -it $(kubectl get pod -l "app=jmeter-master" -o jsonpath='{.items[0].metadata.name}') -- sh -c 'ONE_SHOT=true; /run-test.sh'
 ```
 
 ### Run test via configmap
@@ -65,6 +65,8 @@ The command removes all the Kubernetes components associated with the chart and 
 
 The default configuration values for this chart are listed in [values.yaml](charts/jmeter/values.yaml).
 
+|
+
 ## Project status
 
 Currently kubernetes-jmeter project is able to run some test on distributed slaves but there still is a lot to do. In few days there should be some documentation added to this repo.
@@ -78,7 +80,6 @@ Everything ;)
 *   Resource limitation
 3.  Jmeter test get from maven (0%)
 4.  Jmeter test get from git (20%) - still not push to master
-5.  Default grafana dashboard
-7.  SSL between Jmeter nodes
-8.  Documentation (40%)
-9.  Release of a helm charts and helm repo update process via travis
+5.  SSL between Jmeter nodes
+6.  Documentation (40%)
+7.  Release of a helm charts and helm repo update process via travis
