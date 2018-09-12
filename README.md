@@ -85,6 +85,9 @@ The default configuration values for this chart are listed in [values.yaml](char
 | `anotations`                    | Additional annotations                        | `{}`                     |
 | `labels`                        | Additional labels                             | `{}`                     |
 
+### Grafana tips
+File [grafana.md](docs/grafana.md) would cover all extra tips for config/access grafana charts.
+
 ## Project status
 
 Currently kubernetes-jmeter project is able to run some test on distributed slaves but there still is a lot to do. In few days there should be some documentation added to this repo.
@@ -99,5 +102,5 @@ Everything ;)
 3.  Jmeter test get from maven (0%)
 4.  Jmeter test get from git (20%) - still not push to master
 5.  SSL between Jmeter nodes
-6.  Documentation (50%)
+6.  Documentation (55%)
 7.  Release of a helm charts and helm repo update process via travis
