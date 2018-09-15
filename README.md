@@ -9,17 +9,18 @@ Currently [jmeter](charts/jmeter) helm chart deploy:
 *   InfluxDB instance with graphite interface as a jmeter backend
 *   Grafana instance
 
+![kubernetes-jmeter stack architecture](images/kubernetes-jmeter_architecture.png)
 
 ## Installation
 ```
 git clone git@github.com:kaarolch/kubernetes-jmeter.git
 cd kubernetes-jmeter/charts/jmeter
-helm install --namespace YOUR_NAMESPACE install -n test ./
+helm install -n test ./
 ```
 If you would like to provide custom values.yaml you can add `-f` flag.
 
 ```
-helm install install -n test ./ -f my_values.yaml
+helm install -n test ./ -f my_values.yaml
 ```
 
 The command deploys Jmeter on the Kubernetes cluster in the default configuration. The [configuration](#configuration) section lists the parameters that can be configured during installation.
@@ -31,7 +32,7 @@ If you change deployment name (`-n test`) please update grafana datasource influ
 If you already own grafan and influx stack, kuberentes-jmeter could be deployed without those two dependencies.
 
 ```
-helm install install -n test ./ --set grafana.enabled=false,influxdb.enabled=false
+helm install -n test ./ --set grafana.enabled=false,influxdb.enabled=false
 ```
 
 ## Run sample test
