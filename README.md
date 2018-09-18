@@ -98,7 +98,7 @@ Everything ;)
 1.  Visualization stack (Grafana + influxdb)
 *   Add default dashboard after deployment
 2.  Helm charts - 80% of base chart
-*   Auto update influxdb datasource base on release name currently there is fixed test-influx host added.
+*   (Hold) Auto update influxdb datasource base on release name currently there is fixed test-influx host added.
 *   Resource limitation
 3.  Jmeter test get from maven (0%)
 4.  Jmeter test get from git (20%) - still not push to master

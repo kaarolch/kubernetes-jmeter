@@ -58,7 +58,8 @@ grafana:
       datasources:
         - name: jmeter-influxdb
           type: influxdb
-          #This should be tempalte base on Release.name
+          #This should be tempalte base on Release.name but this would be support in helm version 3 with Lua.
+          #This value should be changed http://{{Release.name}}-influxdb:8086
           url: "http://test-influxdb:8086"
           database: "jmeter"
           access: proxy
