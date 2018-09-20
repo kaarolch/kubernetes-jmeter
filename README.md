@@ -52,7 +52,44 @@ kubectl exec  -it $(kubectl get pod -l "app=jmeter-master" -o jsonpath='{.items[
 
 ### Run test via configmap
 
-TBD
+Upload test as configmap:
+
+```
+kubectl create configmap one-test --from-file=./examples/simple_test.jmx
+```
+
+Deploy test with auto run, if the `config.master.oneShotTest` would be skipped the test need to be trigger as in manual run step.
+
+```
+cd ./charts/jmeter
+helm install -n test ./ --set config.master.testsConfigMap=one-test,config.master.oneShotTest=true
+```
+Logs could be displayed via `kubectl logs` or visualize via grafana:
+```
+kubectl logs $(kubectl get pod -l "app=jmeter-master" -o jsonpath='{.items[0].metadata.name}')
+```
+Example logs from master:
+```
+Sep 20, 2018 8:40:46 PM java.util.prefs.FileSystemPreferences$1 run
+INFO: Created user preferences directory.
+Creating summariser <summary>
+Created the tree successfully using /test/simple_test.jmx
+Configuring remote engine: 172.17.0.10
+Configuring remote engine: 172.17.0.9
+Starting remote engines
+Starting the test @ Thu Sep 20 20:40:47 GMT 2018 (1537476047110)
+Remote engines have been started
+Waiting for possible Shutdown/StopTestNow/Heapdump message on port 4445
+summary +   1003 in 00:00:13 =   76.8/s Avg:   148 Min:   123 Max:   396 Err:     0 (0.00%) Active: 16 Started: 16 Finished: 0
+summary +    597 in 00:00:05 =  110.8/s Avg:   150 Min:   123 Max:   395 Err:     0 (0.00%) Active: 0 Started: 16 Finished: 16
+summary =   1600 in 00:00:18 =   86.7/s Avg:   149 Min:   123 Max:   396 Err:     0 (0.00%)
+Tidying up remote @ Thu Sep 20 20:41:06 GMT 2018 (1537476066203)
+... end of run
+```
+Test could be restarted via pod restart:
+```
+kubectl delete pods $(kubectl get pod -l "app=jmeter-master" -o jsonpath='{.items[0].metadata.name}')
+```
 
 ## Remove stack
 

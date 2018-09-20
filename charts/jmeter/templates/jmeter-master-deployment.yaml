@@ -33,7 +33,7 @@ spec:
         - name: SSL_DISABLED
           value: "{{ .Values.config.disableSSL }}"
         - name: ONE_SHOT
-          value: {{ .Values.config.master.testType }}
+          value: "{{ .Values.config.master.oneShotTest }}"
         - name: SLAVE_SVC_NAME
           value: "{{ template "jmeter.fullname" . }}-slave.{{ .Release.Namespace }}.svc.cluster.local"
         ports:
