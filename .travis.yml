@@ -9,12 +9,12 @@ env:
 
 install:
   - wget http://storage.googleapis.com/kubernetes-helm/helm-${HELM_VERSION}-linux-amd64.tar.gz -O /tmp/helm.tar.gz
-  - tar xzf /tmp/helm.tar.gz -C /tmp --strip-components=1
-  - chmod +x /tmp/helm
+  - sudo tar xzf /tmp/helm.tar.gz -C /usr/bin/ --strip-components=1
+  - sudo chmod +x /usr/bin/helm
 
 before_deploy:
-  - /tmp/helm init --client-only
-  - /tmp/helm repo add stable https://kubernetes-charts.storage.googleapis.com
+  - helm init --client-only
+  - helm repo add stable https://kubernetes-charts.storage.googleapis.com
 
 deploy:
   provider: script
