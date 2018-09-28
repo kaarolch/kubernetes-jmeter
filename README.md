@@ -12,15 +12,23 @@ Currently [jmeter](charts/jmeter) helm chart deploy:
 ![kubernetes-jmeter stack architecture](images/kubernetes-jmeter_architecture.png)
 
 ## Installation
+Using helm repo:
+```
+helm repo add k8s-jmeter https://kaarolch.github.io/kubernetes-jmeter/charts/
+```
+
+Old way: Using local copy of git repository:
 ```
 git clone git@github.com:kaarolch/kubernetes-jmeter.git
 cd kubernetes-jmeter/charts/jmeter
 helm install -n test ./
 ```
+When jmeter chart is installed from local folder `k8s-jmeter/jmeter` should be replace with `./`.
+
 If you would like to provide custom values.yaml you can add `-f` flag.
 
 ```
-helm install -n test ./ -f my_values.yaml
+helm install -n test k8s-jmeter/jmeter -f my_values.yaml
 ```
 
 The command deploys Jmeter on the Kubernetes cluster in the default configuration. The [configuration](#configuration) section lists the parameters that can be configured during installation.
@@ -32,7 +40,7 @@ If you change deployment name (`-n test`) please update grafana datasource influ
 If you already own grafan and influx stack, kuberentes-jmeter could be deployed without those two dependencies.
 
 ```
-helm install -n test ./ --set grafana.enabled=false,influxdb.enabled=false
+helm install -n test k8s-jmeter/jmeter --set grafana.enabled=false,influxdb.enabled=false
 ```
 
 ## Run sample test
@@ -62,7 +70,7 @@ Deploy test with auto run, if the `config.master.oneShotTest` would be skipped t
 
 ```
 cd ./charts/jmeter
-helm install -n test ./ --set config.master.testsConfigMap=one-test,config.master.oneShotTest=true
+helm install -n test k8s-jmeter/jmeter --set config.master.testsConfigMap=one-test,config.master.oneShotTest=true
 ```
 Logs could be displayed via `kubectl logs` or visualize via grafana:
 ```

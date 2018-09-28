@@ -24,11 +24,12 @@ esac
 if [ "$GIT_TAG" != "none" ]; then
     echo "Assigning new tag: $GIT_TAG"
     sed -ri "s/version:.*/version: ${GIT_TAG}/" ./charts/jmeter/Chart.yaml
-    helm package ./charts/jmeter -d ./charts/
-    helm repo index charts/ --url https://github.com/kaarolch/kubernetes-jmeter/charts/
+    helm dep update ./charts/jmeter || exit 1
+    helm package ./charts/jmeter -d ./charts/ || exit 1
+    helm repo index charts/ --url https://kaarolch.github.com/kubernetes-jmeter/charts/ || exit 1
     git add -A
     git commit -a -m "Update helm charts to ${GIT_TAG}"
-    git push "https://${GH_TOKEN}:@${GIT_URL}"
+    git push "https://${GH_TOKEN}:@${GIT_URL}" HEAD:master || exit 0
     git tag "$GIT_TAG" -a -m "Generated tag from TravisCI for build $TRAVIS_BUILD_NUMBER"
     git push "https://${GH_TOKEN}:@${GIT_URL}" --tags || exit 0
 fi
