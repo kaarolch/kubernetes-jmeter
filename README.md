@@ -1,4 +1,4 @@
-[![License](https://img.shields.io/badge/license-MIT%20License-brightgreen.svg)](https://opensource.org/licenses/MIT)
+[![License](https://img.shields.io/badge/license-MIT%20License-brightgreen.svg)](https://opensource.org/licenses/MIT) [![Build Status](https://travis-ci.org/kaarolch/kubernetes-jmeter.svg?branch=master)](https://travis-ci.org/kaarolch/kubernetes-jmeter)
 # kubernetes-jmeter
 
 Jmeter test workload inside kubernetes. [Jmeter](charts/jmeter) chart bootstraps an Jmeter stack on a Kubernetes cluster using the Helm package manager.
@@ -149,4 +149,3 @@ Everything ;)
 4.  Jmeter test get from git (20%) - still not push to master
 5.  SSL between Jmeter nodes
 6.  Documentation (55%)
-7.  Release of a helm charts and helm repo update process via travis
