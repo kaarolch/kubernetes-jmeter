@@ -26,7 +26,7 @@ if [ "$GIT_TAG" != "none" ]; then
     sed -ri "s/version:.*/version: ${GIT_TAG}/" ./charts/jmeter/Chart.yaml
     helm dep update ./charts/jmeter || exit 1
     helm package ./charts/jmeter -d ./charts/ || exit 1
-    helm repo index charts/ --url https://kaarolch.github.com/kubernetes-jmeter/charts/ || exit 1
+    helm repo index charts/ --url https://kaarolch.github.io/kubernetes-jmeter/charts/ || exit 1
     git add -A
     git commit -a -m "Update helm charts to ${GIT_TAG}"
     git push "https://${GH_TOKEN}:@${GIT_URL}" HEAD:master || exit 0
